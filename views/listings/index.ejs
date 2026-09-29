@@ -1,0 +1,162 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderlust</title>
+</head> -->
+
+<%- layout("./layouts/boilerplate") %>
+    <style>
+        #filters{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .filter{
+            text-align: center;
+            margin-right: 2rem;
+            margin-top: 2rem;
+            opacity: 0.7;
+        }
+        .filter:hover{
+            opacity: 1;
+            cursor: pointer;
+        }
+        .filter p{
+            font-size: 0.8rem;
+        }
+
+        .tax-info{
+            display: none;
+        }
+
+        .tax-toggle{
+            border: 1px solid black;
+            border-radius: 1rem;
+            height: 3.25rem;
+            padding: 1rem;
+            margin-left: 8rem;
+            display: flex;
+            align-items: center;
+        }
+    </style>
+
+    <!-- < %= success %>    Now we are implementing flash message inside boilerplate -->
+    <!-- <h3>All listing</h3> -->
+    <!-- <form method = "GET" action = "/listings/new">
+        <button>Create new listing</button>
+    </form> -->
+    <!-- Now we have use this feature in navbar... -->
+
+    <!-- Adding fileter on top of listings -->
+    <div id = "filters">
+        <div class = "filter">
+            <div><i class = "fa-solid fa-fire"></i></div>
+            <p>Trending</p>
+        </div>
+        <div class = "filter">
+            <div><i class = "fa-solid fa-bed"></i></div>
+            <p>Rooms</p>
+        </div>
+        <div class = "filter">
+            <div><i class = "fa-solid fa-mountain-city"></i></div>
+            <p>Iconic cities</p>
+        </div>
+        <div class = "filter">
+            <div><i class = "fa-solid fa-mountain"></i></div>
+            <p>Mountain</p>
+        </div>
+        <div class = "filter">
+            <div><i class = "fa-solid fa-fort-awesome"></i></div>
+            <p>Castles</p>
+        </div>
+        <div class = "filter">
+            <div><i class = "fa-solid fa-person-swimming"></i></div>
+            <p>Amazing Pools</p>
+        </div>
+        <div class = "filter">
+            <div><i class = "fa-solid fa-campground"></i></div>
+            <p>Camping</p>
+        </div>
+        <div class = "filter">
+            <div><i class = "fa-solid fa-cow"></i></div>
+            <p>Farms</p>
+        </div>
+        <div class = "filter">
+            <div><i class = "fa-solid fa-snowflake"></i></div>
+            <p>Arctic</p>
+        </div>
+        <div class = "filter">
+            <div><i class = "fa-solid fa-igloo"></i></div>
+            <p>Domes</p>
+        </div>
+        <div class = "filter">
+            <div><i class = "fa-solid fa-ship"></i></div>
+            <p>Boats</p>
+        </div>
+
+        <div class = "tax-toggle">
+            <div class="form-check form-switch form-check-reverse">
+                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="reverseSwitch">Display total after taxes</label>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Adding card style -->
+    <div class = "row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 row-cols-1 mt-3">
+    <!-- 1. "row" means all cards will show in a single row -->
+    <!-- 2. "row-cols-lg-3" means for each row no. of cols for large screen is 3. -->
+    <!-- 3. "row-cols-md-2" means for each row no. of cols for medium screen is 2. -->
+    <!-- 4. "row-cols-sm-1" means for each row no. of cols for small screen is 1. -->
+    <!-- 5. "row-cols-* "   Bootstrap is built mobile-first. The browser reads row-cols-1 first and 
+     applies it to every screen size starting from 0px up. When the browser window stretches past 
+     992px wide, the row-cols-lg-3 rule overrides it and rearranges the items into 3 columns. -->
+        <% for(let listing of allListings){ %>
+            <a href="/listings/<%= listing._id %>" class = "listing-link">
+                <div class="card col listing-card" >
+                <!-- "col" is added in class which arrange all the cards in columns -->
+                    <img src="<%= listing.image.url %>" class="card-img-top" alt="Listing Image" style="height: 20rem;" />
+                    <div class = "card-img-overlay"> <b>abcd</b></div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <b> <%= listing.title %> <br> </b>
+                            &#8377; <%= listing.price.toLocaleString("en-IN") %> /night
+                            <!-- <i id = "tax-info"> &nbsp; &nbsp; +18% GST</i> -->
+                            <!-- we cann't give this id because this info is not for just one listing
+                             it is for all the listings -->
+                            <i class = "tax-info"> &nbsp; &nbsp; +18% GST</i>
+                        </p>
+                    </div>
+                </div>
+            </a>
+        <% } %>
+    </div>
+
+    <!-- <ul>
+        < % for(let listing of allListings){ %>
+            <li> <a href = "/listings/< %= listing._id %>">< %= listing.title %></a> </li>
+        < % } % >
+    </ul> -->
+
+
+<!-- Adding event listener to show prices after taxe -->
+<script>
+    let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+    taxSwitch.addEventListener("click", ()=>{
+        console.log("clicked");
+        let taxInfo = document.getElementsByClassName("tax-info");
+        for(info of taxInfo){
+            // info.style.display = "inline";   but now switch will function only one time means
+            // even after unclicking "taxinfo" is still showing
+            // to make it functional for each time we click
+            if(info.style.display != "inline"){
+                info.style.display = "inline";
+            } else{
+                info.style.display = "none";
+            }
+        }
+    })
+</script>

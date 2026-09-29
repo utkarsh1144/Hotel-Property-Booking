@@ -1,0 +1,103 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderlust</title>
+</head> -->
+<%- layout("./layouts/boilerplate") %>
+<body>
+    <!-- <h3>Edit this listing</h3>
+    <form method = "POST" action = "/listings/< %= listing._id %>?_method=PUT">
+        <input name = "listing[title]" value = "< %= listing.title %>" type = "text" >
+        <br>
+        <textarea name = "listing[description]" > < %= listing.description %> </textarea>
+        <br>
+        <input name = "listing[image][filename]" value = "< %= listing.image.filename %>" type = "text" >
+        <br>
+        <textarea name = "listing[image][url]" > < %= listing.image.url %> </textarea>
+        <br>
+        <input name = "listing[price]" value = " < %= listing.price %>" type = "number" type = "text" >
+        <br>
+        <input name = "listing[location]" value = "< %= listing.location %>" type = "text" >
+        <br>
+        <input name = "listing[country]" value = "< %= listing.country %>" type = "text" >
+        <br>
+        <button>Edit</button>
+    </form> -->
+
+    <div class = "row">
+    <!-- means form will be in a single row -->
+        <div class = "col-8  offset-2" >
+        <!-- means if there are total 12 cols for a screen it will occupy only 8 cols -->
+        <!-- "offset-2" is used to give space from left side -->
+            <h3>Editing this listing</h3>
+            <form 
+                method = "POST" 
+                action = "/listings/<%= listing._id %>?_method=PUT" 
+                class = "needs-validation" 
+                novalidate
+                enctype="multipart/form-data"
+            >
+                <div class = "mb-3 mt-3">
+                    <label for = "title" class = "form-label" > Title </label>
+                    <input name = "listing[title]" class = "form-control" value = "<%= listing.title %>" type = "text" rquired>
+                    <div class = "valid-feedback">Looks good!</div>
+                </div>
+                <div class = "mb-3">
+                    <label for = "title" class = "form-label" > Description </label>
+                    <textarea name = "listing[description]" class = "form-control" required> <%= listing.description %> </textarea>
+                    <div class = "invalid-feedback">Enter a short description</div>
+                </div>
+                
+                <!-- <div class = "mb-3">
+                    <label for = "title" class = "form-label" > Image filename </label>
+                    <input name = "listing[image][filename]" class = "form-control" value = "<%= listing.image.filename %>" type = "text" >
+
+                </div> -->
+                <!-- <div class = "mb-3">
+                    <label for = "title" class = "form-label" > Image url </label>
+                    <textarea name = "listing[image][url]" class = "form-control" required > <%= listing.image.url %> </textarea>
+                    <div class = "invalid-feedback">Enter valid Image url</div>
+                </div> -->
+                <!-- Image preview for edit image -->
+                <!-- We can preview image using "img" tag and but uploaded images are in high quality
+                 and for preview we don't want to load page for high quality images. we have to reduce
+                 size, we can do it manually but cloudinary has feature called "transform" to reduce 
+                 pixel and size and more -->
+                <div class = "mb-3">
+                    Original image <br>
+                    <img src = "<%= originalImageUrl %>">
+                </div>
+                <!-- Making form capable of editing image -->
+                <div class = "mb-3">
+                    <label for = "title" class = "form-label" > Upload new image </label>
+                    <input name = "listing[image][url]" class = "form-control" type = "file" > </input>
+                </div>
+
+                <!-- We want to put price and country in same row -->
+                <div class = "row">
+                    <div class = "mb-3 col-4">
+                        <label for = "title" class = "form-label" > Price </label>
+                        <input name = "listing[price]" class = "form-control" value = "<%= listing.price %>" type = "number" type = "text" required>
+                        <div class = "invalid-feedback">Enter a valid price</div>
+                    </div>
+                    <div class = "mb-3  col-md-8">
+                        <label for = "title" class = "form-label" > Country </label>
+                        <input name = "listing[country]" class = "form-control" value = "<%= listing.country %>" type = "text" required>
+                        <div class = "invalid-feedback">Enter country name</div>
+                    </div>
+                </div>
+
+                <div class = "mb-3">
+                    <label for = "title" class = "form-label" > Location </label>
+                    <input name = "listing[location]" class = "form-control" value = "<%= listing.location %>" type = "text" required>
+                    <div class = "invalid-feedback">Enter a valid location</div>
+                </div>
+                <button class ="btn btn-dark edit-btn mt-3" >Edit</button>
+                <br> <br>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

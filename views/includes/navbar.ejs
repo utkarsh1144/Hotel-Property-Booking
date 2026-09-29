@@ -1,0 +1,70 @@
+<style>
+  .search-btn{
+    background-color: #fe424d;
+    color: #fff;
+    border-radius: 25px;
+    padding: 0 1rem;
+  }
+  .search-btn:hover{
+    background-color: #fe424d;
+    color: #fff;
+  }
+  .search-btn i{
+    display: inline;
+    margin-right: 0.5rem;
+  }
+  .search-inp {
+    border-radius: 25px;
+    padding: 0.5rem 3rem;
+  }
+</style>
+
+<nav class="navbar navbar-expand-md navbar-light bg-body-light border-bottom sticky-top">
+  <!-- changing "bg-light"(used to add color to html entity) to "bg-body-light"(used to 
+        add background-color to element ).. -->
+  <!-- "navbar-expand-md" means navbar will be expanded for medium and large screen
+        for small screen there will be a togle to expand navbar -->
+  <!-- We have added an extra class which is "border-bottom". THis is a bootstrap class
+        which is used to add "bottom-border" on any structure -->
+  <!-- "sticky-top is used to fixe the navbar on top even when scrolling page..."-->
+  <div class="container-fluid">
+    <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+     <!-- we have replace this with icon -->
+    <a class="navbar-brand" href="/listings"> <i class="fa-regular fa-compass"></i> </a>
+    <button 
+      class="navbar-toggler" 
+      type="button" 
+      data-bs-toggle="collapse" 
+      data-bs-target="#navbarNavAltMarkup" 
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
+        <a class="nav-link" href="/listings">All Listing</a>
+      </div>
+
+      <!-- Added Search functionality to navbar -->
+      <div class = "navbar-nav ms-auto">
+        <form class="d-flex">
+            <input class="form-control me-2 search-inp" type="search" placeholder="Search destination" aria-label="Search">
+            <button class="btn search-btn" type="submit"><i class = "fa-solid fa-magnifying-glass"></i>Search</button>
+          </form>
+      </div>
+      
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="/listings/new">Add new Listing</a>
+        <!-- < % if(! req.user) {  %>     We cann't directly access req.user -->
+        <% if(! currUser) {  %>
+          <a class="nav-link" href="/signup"><b>Singn up</b></a>
+          <a class="nav-link" href="/login"> <b>Login</b></a>
+        <% } %>
+        <!-- < % if(req.user) { %> -->
+        <% if(currUser) { %>
+          <a class="nav-link" href="/logout"> <b>Log out</b></a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>

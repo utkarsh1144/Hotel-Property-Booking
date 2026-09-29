@@ -1,0 +1,121 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderlust</title>
+</head> -->
+<%- layout("/layouts/boilerplate") %>
+<body>
+    <!-- <h3>Creating new listing</h3>
+    <form method = "POST" action = "/listings"> -->
+        <!-- Using this we have to take each key value pair seperately -->
+        <!-- <input name = "title" placeholder="Enter title" type = "text" >
+        <br>
+        <textarea name = "description" placeholder="Enter description"></textarea>
+        <br>
+        <input name = "filename" placeholder="Enter filename" type = "text" >
+        <textarea name = "url" placeholder="Enter url"></textarea>
+        <br>
+        <input name = "price" placeholder="Enter price" type = "number" type = "text" >
+        <br>
+        <input name = "location" placeholder="Enter location" type = "text" >
+        <br>
+        <input name = "country" placeholder="Enter country" type = "text" > -->
+
+
+
+        <!-- Using this we can take all key:value pair in a singel object listing... -->
+        <!-- <input name = "listing[title]" placeholder="Enter title" type = "text" >
+        <br>
+        <textarea name = "listing[description]" placeholder="Enter description"></textarea>
+        <br>
+        <input name = "listing[image][filename]" placeholder="Enter filename" type = "text" >
+        <br>
+        <textarea name = "listing[image][url]" placeholder="Enter url"></textarea>
+        <br>
+        <input name = "listing[price]" placeholder="Enter price" type = "number" type = "text" >
+        <br>
+        <input name = "listing[location]" placeholder="Enter location" type = "text" >
+        <br>
+        <input name = "listing[country]" placeholder="Enter country" type = "text" >
+        <br>
+        <button>Create</button> -->
+
+
+    <!-- Styling new listing using bootstrap -->
+
+    <div class = "row">
+    <!-- means form will be in a single row -->
+        <div class = "col-8  offset-2" >
+        <!-- means if there are total 12 cols for a screen it will occupy only 8 cols -->
+        <!-- "offset-2" is used to give space from left side -->
+            <h3>Creating new listing</h3>
+            <!-- <br> -->
+            <form enctype = "multipart/form-data" method = "POST" action = "/listings" class = "needs-validation" novalidate >
+                <div class = "mb-3 mt-3">
+                    <label for = "title" class = "form-label" > Title </label>
+                    <input name = "listing[title]" class = "form-control" placeholder="Enter title" type = "text" required >
+                    <div class = "valid-feedback">Title looks good!</div>
+                </div>
+                <!-- class = "mb-3" is used to give spacing b/w different div which is 3 -->
+                <!-- "mt-3" means margin from top is 3 -->
+                <div class = "mb-3">
+                    <label for = "title" class = "form-label" > Description </label>
+                    <textarea name = "listing[description]" class = "form-control" placeholder="Add a catchy title" required></textarea>
+                    <div class="invalid-feedback">Enter a short description</div>
+                </div>
+                <!-- <div class = "mb-3">
+                    <label for = "title" class = "form-label" > Image filename </label>
+                    <input name = "listing[image][filename]" class = "form-control" placeholder="Enter filename" type = "text" >
+
+                </div>
+                <div class = "mb-3">
+                    <label for = "title" class = "form-label" > Image url </label>
+                    <textarea name = "listing[image][url]" class = "form-control" placeholder="Enter url" type = "text"></textarea>
+                </div> -->
+                <!-- Now we are taking file as image in form -->
+                <div class = "mb-3">
+                    <label for = "Image" class = "form-label" > Upload listing image </label>
+                    <!-- <textarea name = "listing[image][url]" type = "file" class = "form-control"></textarea> -->
+                    <input name = "listing[image][url]" type = "file" class = "form-control"></input>
+                </div>
+                <!-- <div class = "mb-3">
+                    <label for = "title" class = "form-label" > Price </label>
+                    <input name = "listing[price]" class = "form-control" placeholder="Enter price" type = "number" type = "text" >
+                </div>
+                <div class = "mb-3">
+                    <label for = "title" class = "form-label" > Country </label>
+                    <input name = "listing[country]" class = "form-control" placeholder="Enter country" type = "text" >
+                </div> -->
+
+                <!-- We want to put price and country in same row -->
+                <div class = "row">
+                    <div class = "mb-3 col-4">
+                    <!-- "col-md-4" means for only medium size or greaterr screen it will occupy 4 cols space -->
+                    <!-- for small screen it will occupy all available length -->
+                        <label for = "title" class = "form-label" > Price </label>
+                        <input name = "listing[price]" class = "form-control" placeholder="1200" type="number" required>
+                        <div class = "invalid-feedback">Please enter a valid price</div>
+                    </div>
+                    <div class = "mb-3  col-md-8">
+                        <label for = "title" class = "form-label" > Country </label>
+                        <input name = "listing[country]" class = "form-control" placeholder="INDIA" type = "text" required>
+                        <div class = "invalid-feedback">Please enter country name</div>
+                    </div>
+                </div>
+
+                <div class = "mb-3"> 
+                    <label for = "title" class = "form-label" > Location </label>
+                    <input name = "listing[location]" class = "form-control" placeholder="Enter location" type = "text" required>
+                    <div class = "invalid-feedback">Location should be valid</div>
+                </div>
+                <!-- <br> -->
+                <button class ="btn btn-dark add-btn mt-3" >Add</button>
+                <br> <br>
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>
